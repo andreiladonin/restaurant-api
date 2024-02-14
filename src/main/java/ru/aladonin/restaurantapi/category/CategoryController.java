@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -18,17 +19,29 @@ public class CategoryController {
         this.categoryService = categoryService;
     }
 
-    @PostMapping()
-    public ResponseEntity<Category> create(@RequestBody Category category) {
+    @PostMapping("/create")
+    @ResponseStatus(HttpStatus.CREATED)
+    public Category create(@RequestBody Category category) {
         category = categoryService.createCategory(category);
-        return new ResponseEntity<>(category, HttpStatus.CREATED);
+        return category;
     }
 
     @GetMapping("/{latin}")
-    public ResponseEntity<Category> getCategory(@PathVariable String latin){
+    @ResponseStatus(HttpStatus.OK)
+    public Category  getCategory(@PathVariable String latin){
         Optional<Category> fromDb = categoryService.getCategory(latin);
-        return fromDb
-                .map(s -> new ResponseEntity<>(s, HttpStatus.OK))
-                .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+        return fromDb.get();
+    }
+
+    @GetMapping
+    @ResponseStatus(HttpStatus.OK)
+    public List<Category> getCategories(){
+        return categoryService.getCategoryAll();
+    }
+
+    @DeleteMapping("/{latin}/delete")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteCategory(@PathVariable String latin){
+        categoryService.delete(latin);
     }
 }

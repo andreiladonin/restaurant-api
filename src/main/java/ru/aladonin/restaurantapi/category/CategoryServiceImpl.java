@@ -1,12 +1,15 @@
 package ru.aladonin.restaurantapi.category;
 
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.aladonin.restaurantapi.utils.Transcriptor;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
+@Transactional
 public class CategoryServiceImpl implements CategoryService{
 
     private Transcriptor transcriptor;
@@ -31,5 +34,16 @@ public class CategoryServiceImpl implements CategoryService{
         }
         
         return categoryRepository.findByTransliteration(latin);
+    }
+
+    public List<Category> getCategoryAll() {
+        return categoryRepository.findAll();
+    }
+
+    public void delete(String latin) {
+        if (categoryRepository.findByTransliteration(latin).isEmpty()) {
+            throw new CategoryNotFoundException("Requested Category does not exist");
+        }
+        categoryRepository.deleteByTransliteration(latin);
     }
 }
