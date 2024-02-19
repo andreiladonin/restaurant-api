@@ -32,8 +32,8 @@ public class CategoryServiceImpl implements CategoryService{
         if (categoryRepository.findByTransliteration(latin).isEmpty()) {
             throw new CategoryNotFoundException("Requested Category does not exist");
         }
-        
-        return categoryRepository.findByTransliteration(latin);
+        Optional<Category> category = categoryRepository.findByTransliteration(latin);
+        return category;
     }
 
     public List<Category> getCategoryAll() {

@@ -1,5 +1,6 @@
 package ru.aladonin.restaurantapi.food;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -21,7 +22,7 @@ public class Food {
     private Double cost;
     public Double massInGrams;
     public Boolean isSet = false;
-    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @ManyToOne(optional = false)
     @JoinColumn(name = "category_id", nullable = false)
     private Category category;
     @OneToOne(cascade = CascadeType.REMOVE, mappedBy = "food")

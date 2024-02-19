@@ -1,7 +1,12 @@
 package ru.aladonin.restaurantapi.food;
 
-import org.springframework.stereotype.Service;
+import java.util.List;
+import java.util.Optional;
 
-@Service
-public class FoodService {
+public interface FoodService {
+    Food createFood(Food food);
+    Optional<Food> getFoodById(Long id);
+    List<Food> getFoodAll();
+    List<Food> getFoodByCategory(String latin);
+    void deleteFood(Long id);
 }

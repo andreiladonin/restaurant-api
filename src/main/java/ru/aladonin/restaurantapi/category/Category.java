@@ -25,8 +25,8 @@ public class Category {
 
     private LocalDate date;
 
-    @OneToMany(mappedBy = "category", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Set<Food> foodSet;
+    @OneToMany(cascade = CascadeType.ALL)
+    private Set<Food> foodSet = new HashSet<>();
     @PrePersist
     public void init(){
         date = LocalDate.now();
