@@ -43,7 +43,7 @@ public class FoodServiceImpl  implements FoodService{
 
     public void deleteFood(Long id) {
         if (foodRepository.findById(id).isEmpty()) {
-            throw new FoodNotFoundException("Requested Category does not exist");
+            throw new FoodNotFoundException("Requested Food does not exist");
         }
         foodRepository.deleteById(id);
     }
