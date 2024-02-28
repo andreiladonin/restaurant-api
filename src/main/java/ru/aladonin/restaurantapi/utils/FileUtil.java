@@ -11,7 +11,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 
-public class FileUploadUtil {
+public class FileUtil {
     private static final String UPLOADS = "uploads";
 
     public static String saveFile(String fileName, MultipartFile multipartFile)

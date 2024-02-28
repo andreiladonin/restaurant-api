@@ -8,7 +8,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import ru.aladonin.restaurantapi.utils.FileUploadUtil;
+import ru.aladonin.restaurantapi.utils.FileUtil;
+import ru.aladonin.restaurantapi.utils.FileUtil;
 
 import java.io.IOException;
 
@@ -21,7 +22,7 @@ public class ImageController {
         String filename = StringUtils.cleanPath(multipartFile.getOriginalFilename());
         long size = multipartFile.getSize();
 
-        filename = FileUploadUtil.saveFile(filename, multipartFile);
+        filename = FileUtil.saveFile(filename, multipartFile);
         FileUploadResponse response = new FileUploadResponse(filename, "/images/" + filename, size);
         return ResponseEntity.ok(response);
     }
@@ -31,7 +32,7 @@ public class ImageController {
 
         Resource resource = null;
         try {
-            resource = FileUploadUtil.getFileAsResource(fileCode);
+            resource = FileUtil.getFileAsResource(fileCode);
         } catch (IOException e) {
             return ResponseEntity.internalServerError().build();
         }

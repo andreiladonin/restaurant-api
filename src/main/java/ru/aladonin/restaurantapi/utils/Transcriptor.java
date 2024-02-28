@@ -5,7 +5,7 @@ import com.ibm.icu.text.Transliterator;
 import org.springframework.stereotype.Component;
 
 @Component
-public class Transcriptor {
+public class    Transcriptor {
 
     private static final String CYRILLIC_TO_LATIN = "Cyrillic-Latin";
 
